@@ -1,9 +1,14 @@
-# \<Project Name\> Scrum Team
+# Photo Sharing App Scrum Team
+
 ## Product Owner
-\<Team Member Name\>
+
+Group 9
 ## Scrum Master
-\<Team Member Name\>
+
+Jubin
 ## Developers
-- \<Team Member Name\>
-- \<Team Member Name\>
-- \<Team Member Name\>
+
+* Jubin
+* Shiv
+* Sunny
+* Justin Lee

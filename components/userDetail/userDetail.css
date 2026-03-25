@@ -1,0 +1,26 @@
+.userdetail-card {
+    margin: 24px;
+    padding: 8px;
+}
+ 
+.userdetail-fullname {
+    margin-bottom: 8px;
+}
+ 
+.userdetail-divider {
+    margin-bottom: 16px;
+}
+ 
+.userdetail-row {
+    margin-bottom: 12px;
+}
+ 
+.userdetail-label {
+    font-weight: bold;
+    color: #555;
+}
+ 
+.userdetail-photos-btn {
+    margin-top: 20px;
+}
+ 

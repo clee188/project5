@@ -1,4 +1,22 @@
 .topbar-appBar {
-  height: 60;
-  justify-content: 'center';
+    height: 64px;
 }
+ 
+.topbar-toolbar {
+    display: flex;
+    align-items: center;
+}
+ 
+.topbar-name {
+    margin-right: 24px;
+}
+ 
+.topbar-context {
+    text-align: center;
+}
+ 
+.topbar-version {
+    margin-left: 16px;
+    opacity: 0.85;
+}
+ 

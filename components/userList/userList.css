@@ -1,0 +1,16 @@
+.user-list {
+  padding: 10px;
+}
+
+.user-list h6 {
+  margin-bottom: 10px;
+}
+
+.user-list a {
+  text-decoration: none;
+  color: #1976d2;
+}
+
+.user-list a:hover {
+  text-decoration: underline;
+}

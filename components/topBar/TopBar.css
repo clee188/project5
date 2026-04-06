@@ -9,10 +9,12 @@
  
 .topbar-name {
     margin-right: 24px;
+    font-weight: bold;
 }
  
 .topbar-context {
     text-align: center;
+    flrx-grow: 1;
 }
  
 .topbar-version {

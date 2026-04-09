@@ -158,7 +158,7 @@ app.get("/user/list", function (request, response) {
  */
 app.get("/user/:id", function (request, response) {
   const id = request.params.id;
-  User.findById(id, function (err, user) {   // added this
+  User.findById(id, "_id first_name last_name location description occupation", function (err, user) {
     if (err || !user) {
       console.log("User with _id:" + id + " not found.");
       response.status(400).send("Not found");
@@ -181,10 +181,10 @@ app.get("/photosOfUser/:id", function (request, response) {
       return;
     }
 
-    Photo.find({ user_id: id }, function (err, photos) {
-      if (err) {
-        response.status(500).send(err);
-        return;
+    Photo.find({ user_id: id }, function (photoErr, photos) {
+      if (photoErr) {
+        response.status(500).send(photoErr);
+      return;
       }
 
       if (!photos || photos.length === 0) {
@@ -196,16 +196,17 @@ app.get("/photosOfUser/:id", function (request, response) {
 
       photos.forEach(function (photo) {
         let photoObj = JSON.parse(JSON.stringify(photo));
+        delete photoObj.__v;
         photoObj.comments = photoObj.comments || [];
 
         let promises = photoObj.comments.map(function (comment) {
           return new Promise(function (resolve) {
-            User.findById(comment.user_id, function (err, user) {
-              if (user) {
+            User.findById(comment.user_id, function (commentErr, commentUser) {
+              if (commentUser) {
                 comment.user = {
-                  _id: user._id,
-                  first_name: user.first_name,
-                  last_name: user.last_name,
+                  _id: commentUser._id,
+                  first_name: commentUser.first_name,
+                  last_name: commentUser.last_name,
                 };
               }
               delete comment.user_id;

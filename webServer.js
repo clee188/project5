@@ -38,7 +38,18 @@ const async = require("async");
 
 const express = require("express");
 const app = express();
+const session = require("express-session");
+const bodyParser = require("body-parser");
 
+// Support JSON-encoded bodies (required for your POST requests)
+app.use(bodyParser.json());
+
+// Set up Express Session logic
+app.use(session({
+  secret: "secretKey", // You can use any string here
+  resave: false,
+  saveUninitialized: false
+}));
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 const User = require("./schema/user.js");
 const Photo = require("./schema/photo.js");
@@ -224,7 +235,51 @@ app.get("/photosOfUser/:id", function (request, response) {
     });
   });
 });
+/**
+ * URL /admin/login - Handles user login.
+ */
+app.post("/admin/login", function (request, response) {
+  const login_name = request.body.login_name;
 
+  User.findOne({ login_name: login_name }, function (err, user) {
+    if (err || !user) {
+      console.log("Login failed for name: " + login_name);
+      response.status(400).send("Login name not found");
+      return;
+    }
+    // Store user info in the session
+    request.session.user_id = user._id;
+    request.session.first_name = user.first_name;
+    
+    // Return the user info (needed by your React app)
+    response.status(200).send(user);
+  });
+});
+
+/**
+ * URL /admin/logout - Handles user logout.
+ */
+app.post("/admin/logout", function (request, response) {
+  if (!request.session.user_id) {
+    response.status(400).send("Not logged in");
+    return;
+  }
+  request.session.destroy(function (err) {
+    if (err) {
+      response.status(500).send("Logout failed");
+    } else {
+      response.status(200).send();
+    }
+  });
+});
+app.use(function(request, response, next) {
+  // If the user is NOT logged in AND they aren't trying to login/logout
+  if (!request.session.user_id && !request.path.startsWith("/admin/")) {
+    response.status(401).send("Unauthorized");
+    return;
+  }
+  next();
+});
 const server = app.listen(3000, function () {
   const port = server.address().port;
   console.log(

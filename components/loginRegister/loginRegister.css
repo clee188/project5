@@ -1,1 +1,46 @@
+/* Main container to center the login box on the page */
+.login-register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Keeps it centered vertically in the main view */
+    padding: 20px;
+}
 
+/* Styling the login box/form area */
+.login-form-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Adds space between inputs and buttons */
+}
+
+/* Error message styling */
+.login-error-text {
+    color: #d32f2f; /* Standard Material UI error red */
+    font-size: 0.875rem;
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Optional: style the transition for the "Register" section later */
+.register-toggle-text {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    text-align: center;
+}
+
+.register-toggle-text:hover {
+    text-decoration: underline;
+    color: #1976d2;
+}
